@@ -410,7 +410,7 @@
             <span class="badge-dot"></span> v1.0.0 Stable Release
         </div>
         <h1>mystictax9213 Cleaner</h1>
-        <p class="subtitle">Das ultimative Werkzeug für die schnelle und sichere Bereinigung von System-Caches und Datenmüll.</p>
+        <p class="subtitle">Das ultimative Werkzeug für die schnelle und sichere Bereinigung von System-Caches, Browser-Daten und Müll.</p>
         
         <div class="btn-group">
             <a href="mystictax9213.deb" class="btn-action" download>
@@ -461,7 +461,7 @@
     <div class="modal-card">
         <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
         
-        <h2>Manuelle System-Bereinigung</h2>
+        <h2>Manuelle System- & Browser-Bereinigung</h2>
         <p style="color: var(--text-sub); font-size: 14px; margin-top: 6px;">Wähle dein Betriebssystem und kopiere die Befehle direkt in dein Terminal:</p>
 
         <!-- Windows -->
@@ -470,12 +470,17 @@
                 <h4><i class="fa-brands fa-windows"></i> Windows (PowerShell Administrator)</h4>
                 <button class="btn-copy" onclick="copyCode('cmd-win')"><i class="fa-regular fa-copy"></i> Kopieren</button>
             </div>
-            <div class="cmd-block" id="cmd-win"># Temp-Dateien löschen
+            <div class="cmd-block" id="cmd-win"># System Temp-Dateien löschen
 Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
 
 # Papierkorb leeren
-Clear-RecycleBin -Force -ErrorAction SilentlyContinue</div>
+Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+
+# Browser Caches löschen (Chrome, Edge, Firefox)
+Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:APPDATA\Mozilla\Firefox\Profiles\*.default-release\cache2\entries\*" -Recurse -Force -ErrorAction SilentlyContinue</div>
         </div>
 
         <!-- macOS -->
@@ -487,10 +492,13 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue</div>
             <div class="cmd-block" id="cmd-mac"># App- & Benutzer-Caches löschen
 rm -rf ~/Library/Caches/*
 
-# System-Logs leeren
-sudo rm -rf /private/var/log/*
+# Browser-Caches löschen (Chrome, Safari, Firefox)
+rm -rf ~/Library/Caches/Google/Chrome/Default/Cache/*
+rm -rf ~/Library/Caches/com.apple.Safari/Caches/*
+rm -rf ~/Library/Caches/Firefox/Profiles/*/cache2/entries/*
 
-# DNS-Cache leeren
+# System-Logs & DNS-Cache leeren
+sudo rm -rf /private/var/log/*
 sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</div>
         </div>
 
@@ -503,10 +511,12 @@ sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</div>
             <div class="cmd-block" id="cmd-linux"># Paket-Cache & Restmüll entfernen
 sudo apt clean && sudo apt autoremove -y
 
-# Thumbnail-Cache löschen
-rm -rf ~/.cache/thumbnails/*
+# Browser-Caches löschen (Chrome & Firefox)
+rm -rf ~/.cache/google-chrome/Default/Cache/*
+rm -rf ~/.cache/mozilla/firefox/*.default-release/cache2/entries/*
 
-# System-Logs bereinigen (max 50MB behalten)
+# Thumbnail-Cache & System-Logs bereinigen
+rm -rf ~/.cache/thumbnails/*
 sudo journalctl --vacuum-size=50M</div>
         </div>
     </div>
