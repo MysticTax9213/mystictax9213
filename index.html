@@ -200,67 +200,104 @@
             word-break: break-all;
         }
 
-        /* MODAL (Anleitungs-Fenster) */
+        /* MODAL POPUP */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
         }
 
         .modal-card {
             background: #0d1322;
             border: 1px solid var(--border);
             border-radius: 20px;
-            max-width: 650px;
+            max-width: 680px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
             padding: 32px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
             position: relative;
         }
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
             color: var(--text-sub);
-            font-size: 20px;
+            font-size: 16px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        .modal-close:hover { color: white; }
+        .modal-close:hover { color: white; background: rgba(255, 255, 255, 0.15); }
 
         .modal-section {
-            margin-top: 20px;
+            margin-top: 24px;
             text-align: left;
+        }
+
+        .modal-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
         }
 
         .modal-section h4 {
             color: var(--accent-glow);
-            margin-bottom: 8px;
+            font-size: 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .btn-copy {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-glow);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: rgba(59, 130, 246, 0.3);
+            color: white;
         }
 
         .cmd-block {
             background: #05080f;
             border: 1px solid var(--border);
-            padding: 12px;
-            border-radius: 8px;
-            font-family: monospace;
+            padding: 14px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
             color: #38bdf8;
             font-size: 13px;
-            margin-top: 6px;
+            line-height: 1.5;
             white-space: pre-wrap;
         }
 
@@ -289,14 +326,14 @@
             <span class="badge-dot"></span> v1.0.0 Stable Release
         </div>
         <h1>mystictax9213 Cleaner</h1>
-        <p class="subtitle">Ein leistungsstarkes Aufräum-Tool für Linux-Systeme. Nutzen Sie das `.deb`-Paket oder führen Sie die Schritte manuell aus.</p>
+        <p class="subtitle">Ein leistungsstarkes Aufräum-Tool für Linux-Systeme. Nutzen Sie das `.deb`-Paket oder führen Sie die Befehle auf Windows & Mac manuell aus.</p>
         
         <div class="btn-group">
             <a href="mystictax9213.deb" class="btn-action" download>
                 <i class="fa-solid fa-download"></i> Download .deb Paket
             </a>
             <button class="btn-action btn-secondary" onclick="openModal()">
-                <i class="fa-solid fa-code"></i> Manuelle Anleitung (Win / Mac / Linux)
+                <i class="fa-solid fa-terminal"></i> Manuelle Befehle (Win / Mac / Linux)
             </button>
         </div>
     </div>
@@ -310,7 +347,7 @@
         <div class="feature-card">
             <i class="fa-solid fa-shield-halved"></i>
             <h3>Sicher & Zuverlässig</h3>
-            <p>Entwickelt für Debian/Ubuntu-Systeme ohne Risiko für Systemdateien.</p>
+            <p>Entwickelt für Linux-Systeme ohne Risiko für wichtige Systemdateien.</p>
         </div>
         <div class="feature-card">
             <i class="fa-solid fa-terminal"></i>
@@ -330,29 +367,29 @@
     </div>
 
     <footer>
-        <p>© 2026 mystictax9213 — Open Source Linux Utility</p>
+        <p>© 2026 mystictax9213 — Open Source Utility</p>
         <p style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
             Kontakt: <a href="mailto:mystictax9213@proton.me">mystictax9213@proton.me</a>
         </p>
     </footer>
 </div>
 
-<!-- Modal Popup für Manuelle Anleitungen -->
+<!-- Modal Popup -->
 <div class="modal-overlay" id="guideModal">
     <div class="modal-card">
         <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
         
         <h2>Manuelle System-Bereinigung</h2>
-        <p style="color: var(--text-sub); font-size: 14px; margin-top: 4px;">So führen Sie die Aktionen des Reinigungstools ohne Installation auf Ihrem Betriebssystem aus:</p>
+        <p style="color: var(--text-sub); font-size: 14px; margin-top: 6px;">Kopieren Sie die Befehle für Ihr Betriebssystem, um Caches & Müll manuell zu löschen:</p>
 
         <!-- Windows -->
         <div class="modal-section">
-            <h4><i class="fa-brands fa-windows"></i> Windows (PowerShell / CMD)</h4>
-            <p style="font-size: 13px; color: var(--text-sub);">Öffnen Sie die PowerShell als Administrator und führen Sie folgende Befehle aus:</p>
-            <div class="cmd-block"># Temp-Dateien des Benutzers löschen
+            <div class="modal-section-header">
+                <h4><i class="fa-brands fa-windows"></i> Windows (PowerShell Administrator)</h4>
+                <button class="btn-copy" onclick="copyCode('cmd-win')"><i class="fa-regular fa-copy"></i> Kopieren</button>
+            </div>
+            <div class="cmd-block" id="cmd-win"># Temp-Dateien löschen
 Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-
-# Windows-System-Temp löschen
 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
 
 # Papierkorb leeren
@@ -361,9 +398,11 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue</div>
 
         <!-- macOS -->
         <div class="modal-section">
-            <h4><i class="fa-brands fa-apple"></i> macOS (Terminal)</h4>
-            <p style="font-size: 13px; color: var(--text-sub);">Öffnen Sie das Terminal (`Cmd + Leertaste` -> Terminal) und führen Sie folgende Befehle aus:</p>
-            <div class="cmd-block"># App- & Benutzer-Caches löschen
+            <div class="modal-section-header">
+                <h4><i class="fa-brands fa-apple"></i> macOS (Terminal)</h4>
+                <button class="btn-copy" onclick="copyCode('cmd-mac')"><i class="fa-regular fa-copy"></i> Kopieren</button>
+            </div>
+            <div class="cmd-block" id="cmd-mac"># App- & Benutzer-Caches löschen
 rm -rf ~/Library/Caches/*
 
 # System-Logs leeren
@@ -375,15 +414,17 @@ sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</div>
 
         <!-- Linux -->
         <div class="modal-section">
-            <h4><i class="fa-brands fa-linux"></i> Linux (Ubuntu/Debian Terminal)</h4>
-            <p style="font-size: 13px; color: var(--text-sub);">Das macht das Skript in der `.deb`-Datei im Hintergrund:</p>
-            <div class="cmd-block"># Paket-Cache leeren
+            <div class="modal-section-header">
+                <h4><i class="fa-brands fa-linux"></i> Linux (Ubuntu/Debian Terminal)</h4>
+                <button class="btn-copy" onclick="copyCode('cmd-linux')"><i class="fa-regular fa-copy"></i> Kopieren</button>
+            </div>
+            <div class="cmd-block" id="cmd-linux"># Paket-Cache & Restmüll entfernen
 sudo apt clean && sudo apt autoremove -y
 
 # Thumbnail-Cache löschen
 rm -rf ~/.cache/thumbnails/*
 
-# Systemd Journal-Logs stutzen (auf max. 50MB reduzieren)
+# System-Logs bereinigen (max 50MB behalten)
 sudo journalctl --vacuum-size=50M</div>
         </div>
     </div>
@@ -391,14 +432,20 @@ sudo journalctl --vacuum-size=50M</div>
 
 <script>
     function openModal() {
-        document.getElementById('guideModal').style.display = 'flex';
+        document.getElementById('guideModal').classList.add('active');
     }
 
     function closeModal() {
-        document.getElementById('guideModal').style.display = 'none';
+        document.getElementById('guideModal').classList.remove('active');
     }
 
-    // Schließt das Modal, wenn man außerhalb klickt
+    function copyCode(elementId) {
+        const textToCopy = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert("Befehle erfolgreich in die Zwischenablage kopiert!");
+        });
+    }
+
     window.onclick = function(event) {
         const modal = document.getElementById('guideModal');
         if (event.target === modal) {
