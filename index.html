@@ -3,93 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mystictax9213 Cleaner — Official Release</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>mystictax9213 Cleaner — Ultimate Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
         :root {
-            --bg: #0b0f19;
-            --card-bg: rgba(23, 32, 54, 0.6);
-            --accent: #3b82f6;
-            --accent-glow: #60a5fa;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.5);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
             --success: #10b981;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 50% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dynamic Background Glows */
+        .bg-glow-1 {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-2 {
+            position: absolute;
+            bottom: -10%;
+            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 860px;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Hero Card */
         .hero {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 48px 32px;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 56px 40px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            margin-bottom: 24px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-glow);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 6px 14px;
-            border-radius: 20px;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.08);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            padding: 8px 16px;
+            border-radius: 100px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 0.3px;
         }
 
         .badge-dot {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background-color: var(--success);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         h1 {
-            font-size: 40px;
+            font-size: 48px;
             font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.15;
         }
 
         p.subtitle {
             color: var(--text-sub);
-            font-size: 18px;
-            max-width: 540px;
-            margin: 0 auto 32px auto;
+            font-size: 17px;
+            max-width: 580px;
+            margin: 0 auto 36px auto;
             line-height: 1.6;
+            font-weight: 400;
         }
 
+        /* Buttons */
         .btn-group {
             display: flex;
             gap: 16px;
@@ -100,63 +154,80 @@
         .btn-action {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            gap: 12px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: white;
-            padding: 16px 28px;
-            border-radius: 12px;
+            padding: 16px 32px;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 700;
             font-size: 15px;
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
-            transition: all 0.2s ease;
+            box-shadow: 0 10px 30px -5px var(--accent-glow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
         }
 
         .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5);
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px -5px rgba(139, 92, 246, 0.5);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
             box-shadow: none;
+            color: var(--text-main);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
 
+        /* Grid Section */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
         }
 
         .feature-card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 28px;
             text-align: left;
+            transition: all 0.3s ease;
         }
 
-        .feature-card i {
-            font-size: 24px;
-            color: var(--accent-glow);
-            margin-bottom: 12px;
+        .feature-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            color: #60a5fa;
+            font-size: 20px;
         }
 
         .feature-card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
         .feature-card p {
@@ -165,22 +236,26 @@
             line-height: 1.5;
         }
 
+        /* Terminal Window */
         .terminal-box {
-            background: #090d16;
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            background: #030712;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
             padding: 20px 24px;
             text-align: left;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
         }
 
         .terminal-header {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background: #ef4444; }
         .yellow { background: #f59e0b; }
         .green { background: #10b981; }
@@ -189,23 +264,23 @@
             font-size: 12px;
             color: var(--text-sub);
             margin-left: auto;
-            font-family: monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         code {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: #38bdf8;
             font-size: 14px;
             display: block;
             word-break: break-all;
         }
 
-        /* MODAL POPUP */
+        /* Modal Popup */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(16px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -221,27 +296,25 @@
         }
 
         .modal-card {
-            background: #0d1322;
-            border: 1px solid var(--border);
-            border-radius: 20px;
+            background: #0B0F19;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
             max-width: 680px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            padding: 32px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+            padding: 36px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
             position: relative;
         }
 
         .modal-close {
             position: absolute;
-            top: 24px;
-            right: 24px;
+            top: 24px; right: 24px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
+            border: 1px solid var(--card-border);
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 36px; height: 36px;
             color: var(--text-sub);
             font-size: 16px;
             cursor: pointer;
@@ -253,72 +326,83 @@
 
         .modal-close:hover { color: white; background: rgba(255, 255, 255, 0.15); }
 
-        .modal-section {
-            margin-top: 24px;
-            text-align: left;
-        }
+        .modal-section { margin-top: 24px; text-align: left; }
 
         .modal-section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .modal-section h4 {
-            color: var(--accent-glow);
-            font-size: 16px;
+            color: #60a5fa;
+            font-size: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .btn-copy {
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.3);
-            color: var(--accent-glow);
-            padding: 4px 10px;
-            border-radius: 6px;
+            color: #60a5fa;
+            padding: 6px 12px;
+            border-radius: 8px;
             font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .btn-copy:hover {
-            background: rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.25);
             color: white;
         }
 
         .cmd-block {
-            background: #05080f;
-            border: 1px solid var(--border);
-            padding: 14px;
-            border-radius: 10px;
-            font-family: 'Courier New', Courier, monospace;
+            background: #030712;
+            border: 1px solid var(--card-border);
+            padding: 16px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
             color: #38bdf8;
             font-size: 13px;
-            line-height: 1.5;
+            line-height: 1.6;
             white-space: pre-wrap;
         }
 
+        /* Footer */
         footer {
             text-align: center;
-            margin-top: 24px;
+            margin-top: 36px;
             color: var(--text-sub);
-            font-size: 13px;
+            font-size: 13.5px;
+            line-height: 1.8;
         }
 
         footer a {
-            color: var(--accent-glow);
+            color: #60a5fa;
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         footer a:hover {
+            color: var(--text-main);
             text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 34px; }
+            .hero { padding: 36px 20px; }
+            .btn-action { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
+
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
 
 <div class="container">
     <div class="hero">
@@ -326,33 +410,33 @@
             <span class="badge-dot"></span> v1.0.0 Stable Release
         </div>
         <h1>mystictax9213 Cleaner</h1>
-        <p class="subtitle">Ein leistungsstarkes Aufräum-Tool für Linux-Systeme. Nutzen Sie das `.deb`-Paket oder führen Sie die Befehle auf Windows & Mac manuell aus.</p>
+        <p class="subtitle">Das ultimative Werkzeug für die schnelle und sichere Bereinigung von System-Caches und Datenmüll.</p>
         
         <div class="btn-group">
             <a href="mystictax9213.deb" class="btn-action" download>
                 <i class="fa-solid fa-download"></i> Download .deb Paket
             </a>
             <button class="btn-action btn-secondary" onclick="openModal()">
-                <i class="fa-solid fa-terminal"></i> Manuelle Befehle (Win / Mac / Linux)
+                <i class="fa-solid fa-terminal"></i> Manuelle Befehle
             </button>
         </div>
     </div>
 
     <div class="grid">
         <div class="feature-card">
-            <i class="fa-solid fa-bolt"></i>
+            <div class="icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
             <h3>High Performance</h3>
-            <p>Bereinigt System-Caches und unnötigen Müll in Sekundenschnelle.</p>
+            <p>Befreit Caches und Ballast in Sekundenbruchteilen für spürbar mehr Speed.</p>
         </div>
         <div class="feature-card">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Sicher & Zuverlässig</h3>
-            <p>Entwickelt für Linux-Systeme ohne Risiko für wichtige Systemdateien.</p>
+            <div class="icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Absolut Sicher</h3>
+            <p>Bereinigt Systembereiche präzise, ohne wichtige Dateien zu gefährden.</p>
         </div>
         <div class="feature-card">
-            <i class="fa-solid fa-terminal"></i>
-            <h3>Einfache Installation</h3>
-            <p>Bequem per Terminal-Befehl oder Paket-Manager installierbar.</p>
+            <div class="icon-wrapper"><i class="fa-solid fa-terminal"></i></div>
+            <h3>Schnelle Montage</h3>
+            <p>Direkt als Paket installierbar oder flexibel via Terminal ausführen.</p>
         </div>
     </div>
 
@@ -368,9 +452,7 @@
 
     <footer>
         <p>© 2026 mystictax9213. Alle Rechte vorbehalten.</p>
-        <p style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
-            Kontakt: <a href="mailto:mystictax9213@proton.me">mystictax9213@proton.me</a>
-        </p>
+        <p>Kontakt: <a href="mailto:mystictax9213@proton.me">mystictax9213@proton.me</a></p>
     </footer>
 </div>
 
@@ -380,7 +462,7 @@
         <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
         
         <h2>Manuelle System-Bereinigung</h2>
-        <p style="color: var(--text-sub); font-size: 14px; margin-top: 6px;">Kopieren Sie die Befehle für Ihr Betriebssystem, um Caches & Müll manuell zu löschen:</p>
+        <p style="color: var(--text-sub); font-size: 14px; margin-top: 6px;">Wähle dein Betriebssystem und kopiere die Befehle direkt in dein Terminal:</p>
 
         <!-- Windows -->
         <div class="modal-section">
@@ -442,7 +524,7 @@ sudo journalctl --vacuum-size=50M</div>
     function copyCode(elementId) {
         const textToCopy = document.getElementById(elementId).innerText;
         navigator.clipboard.writeText(textToCopy).then(() => {
-            alert("Befehle erfolgreich in die Zwischenablage kopiert!");
+            alert("Befehle erfolgreich kopiert!");
         });
     }
 
